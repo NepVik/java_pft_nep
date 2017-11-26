@@ -4,17 +4,14 @@ public class Task2 {
 
   public static void main (String args[]) {
 
-    Point p1 = new Point();
-    p1.x = 3;
-    p1.y = 2;
-    Point p2 = new Point();
-    p2.x = 7;
-    p2.y = 5;
-    System.out.println("Расстояние от точки p1 до p2 = " + distance(p1, p2));
+    Point d1 = new Point(3, 2, 7, 5);
+    Point d2 = new Point(5, 4, 1, 9);
+
+    System.out.println("1. Расстояние от точки c координатами: \nx1 = " + d1.x1 + "\ny1 = " + d1.y1 + "\n до точки с координатами: \nx2 = " + d1.x2 + "\ny2 = " + d1.y2 + "\nравно - " + d1.distance());
+    System.out.println();
+    System.out.println("2. Расстояние от точки c координатами: \nx1 = " + d2.x1 + "\ny1 = " + d2.y1 + "\n до точки с координатами: \nx2 = " + d2.x2 + "\ny2 = " + d2.y2 + "\nравно - " + d2.distance());
+
+
   }
 
-  public static double distance(Point p1, Point p2){
-
-    return Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2));
-  }
 }
