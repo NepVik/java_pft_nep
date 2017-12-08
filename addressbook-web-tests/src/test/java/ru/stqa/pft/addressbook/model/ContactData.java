@@ -8,9 +8,9 @@ public class ContactData {
   private final String mobile;
   private String group;
 
-  public ContactData(String firstname, String lastname, String address, String email, String mobile, String group) {
-    this.firstname = firstname;
-    this.lastname = lastname;
+  public ContactData(String name1, String name2, String address, String email, String mobile, String group) {
+    this.firstname = name1;
+    this.lastname = name2;
     this.address = address;
     this.email = email;
     this.mobile = mobile;
