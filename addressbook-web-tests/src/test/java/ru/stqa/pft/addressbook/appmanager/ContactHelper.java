@@ -52,7 +52,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteContacts() {
-    click(By.cssSelector("//div[@id='content']/form[2]/div[2]/input"));
+    click(By.name("selected[]"));
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
   public void initContactModification() {
@@ -82,7 +83,7 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       String name = element.getText();
-      ContactData contact = new ContactData(null, null, null, null, null, null);
+      ContactData contact = new ContactData("Name1", "Name2", null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
