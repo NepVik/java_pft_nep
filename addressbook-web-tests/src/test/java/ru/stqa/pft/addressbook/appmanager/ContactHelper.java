@@ -56,8 +56,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
-  public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(int index) {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[" + index +"]/td[8]/a/img"));
   }
 
   public void submitContactModification() {
@@ -79,11 +79,24 @@ public class ContactHelper extends HelperBase {
   }
 
   public List<ContactData> getContactList() {
+    int k = 0;
+    String lastname = null;
+    String firstname = null;
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.name("entry"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']")); //список строк таблицы контактов
     for (WebElement element : elements) {
-      String name = element.getText();
-      ContactData contact = new ContactData("Name1", "Name2", null, null, null, null);
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      for (WebElement cell : cells) {
+        if (k == 1) {
+          lastname = cell.getText();
+        } else if (k == 2) {
+          firstname = cell.getText();
+        } else if (k > 2) {
+          break;
+        }
+        k++;
+      }
+      ContactData contact = new ContactData(firstname, lastname, null, null, null, null); //добавление в список контакта
       contacts.add(contact);
     }
     return contacts;
