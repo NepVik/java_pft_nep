@@ -52,7 +52,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteContacts() {
-    click(By.name("selected[]"));
+//    click(By.name("selected[]"));
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
@@ -85,7 +85,8 @@ public class ContactHelper extends HelperBase {
       List<WebElement> cells = element.findElements(By.tagName("td"));
         String lastname = element.findElement(By.xpath(".//td[2]")).getText();
         String firstname = element.findElement(By.xpath(".//td[3]")).getText();
-        ContactData contact = new ContactData(firstname, lastname, null, null, null, null); //добавление в список контакта
+        String id = element.findElement(By.tagName("input")).getAttribute("value");
+        ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null); //добавление в список контакта
         contacts.add(contact);
       }
     return contacts;
