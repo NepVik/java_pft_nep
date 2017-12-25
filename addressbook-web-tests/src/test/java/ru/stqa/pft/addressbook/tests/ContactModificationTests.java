@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.*;
 
@@ -11,7 +10,7 @@ public class ContactModificationTests extends TestBase {
 
   @Test(enabled = false)
   public void testUpdateUser() {
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     if (! app.getContactHelper().isThereAContact()) {
       app.gotoAddNew();
       app.getContactHelper().createContact(new ContactData("1", "2", "3", "4", "5", "[none]"));
