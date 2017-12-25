@@ -7,11 +7,11 @@ public class ContactData {
   private final String email;
   private final String mobile;
   private String group;
-  private final String id;
+  private int id;
 
 
   public ContactData(String name1,String name2,String address,String email,String mobile,String group) {
-    this.id = null;
+    this.id = Integer.MAX_VALUE;
     this.firstname = name1;
     this.lastname = name2;
     this.address = address;
@@ -20,7 +20,7 @@ public class ContactData {
     this.group = group;
   }
 
-  public ContactData(String id,String name1,String name2,String address,String email,String mobile,String group) {
+  public ContactData(int id,String name1,String name2,String address,String email,String mobile,String group) {
     this.id = id;
     this.firstname = name1;
     this.lastname = name2;
@@ -54,28 +54,12 @@ public class ContactData {
     return group;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    ContactData that = (ContactData) o;
-
-    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    return id != null ? id.equals(that.id) : that.id == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
-    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (id != null ? id.hashCode() : 0);
-    return result;
+  public void setId(int id) {
+    this.id = id;
   }
 
   @Override
@@ -86,4 +70,24 @@ public class ContactData {
             ", id='" + id + '\'' +
             '}';
   }
+
+  @Override
+  public int hashCode() {
+    int result = firstname != null ? firstname.hashCode() : 0;
+    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+  }
+
+
 }
