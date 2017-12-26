@@ -53,11 +53,6 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
-  public void delete(ContactData contact) {
-    selectContactById(contact.getId());
-    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-  }
-
   public void initModifyById(int id) {
     wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
   }
@@ -69,6 +64,7 @@ public class ContactHelper extends HelperBase {
   public void create(ContactData contact) {
     fillNewContactForm(contact, true);
     submitNewContactCreation();
+    contactCeche = null;
     returnToHomePage();
   }
 
@@ -76,7 +72,14 @@ public class ContactHelper extends HelperBase {
     initModifyById(contact.getId());
     fillNewContactForm(contact, false);
     submitContactModification();
+    contactCeche = null;
     returnToHomePage();
+  }
+
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    contactCeche = null;
   }
 
   public boolean isThereAContact() {
@@ -87,15 +90,20 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCeche = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCeche != null) {
+      return new Contacts(contactCeche);
+    }
+    contactCeche = new Contacts();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      contactCeche.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
-    return contacts;
+    return new Contacts(contactCeche);
   }
 }
