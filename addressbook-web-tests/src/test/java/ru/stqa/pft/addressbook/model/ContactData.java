@@ -6,7 +6,18 @@ public class ContactData {
   private String lastname;
   private String address;
   private String email;
+  private String homePhone;
   private String mobile;
+  private String workPhone;
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
   private String group;
 
   public String getFirstname() {
@@ -28,6 +39,7 @@ public class ContactData {
   public String getMobile() {
     return mobile;
   }
+
 
   public String getGroup() {
     return group;
@@ -62,8 +74,18 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
   public ContactData withMobile(String mobile) {
     this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 

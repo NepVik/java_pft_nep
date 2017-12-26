@@ -53,10 +53,6 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
-  public void initModifyById(int id) {
-    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
-  }
-
   public void submitContactModification() {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
@@ -106,4 +102,34 @@ public class ContactHelper extends HelperBase {
     }
     return new Contacts(contactCeche);
   }
+
+  public ContactData infoFormEditForm(ContactData contact) {
+    initModifyById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomePhone(homePhone).withMobile(mobile).withWorkPhone(workPhone);
+  }
+
+  private void initModifyById(int id) {
+//    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements((By.tagName("td")));
+    cells.get(7).findElement(By.tagName("a")).click();
+
+//    wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
+//    wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
+//    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+
+
+
+
+  }
+
 }
