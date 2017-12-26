@@ -9,14 +9,14 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase{
 
-  @Test(enabled = false)
+  @Test
   public void testUserCreation() {
-    app.goTo().gotoHome();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.gotoAddNew();
+    app.goTo().homePage();
+    List<ContactData> before = app.contact().list();
+    app.goTo().addNewPage();
     ContactData contact = new ContactData("Name2", "Name3", "Address1", "E-mail1", "1234567890", "[none]");
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact);
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(contact);

@@ -47,12 +47,11 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void selectedContacts(int index) {
+  public void select(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void deleteContacts() {
-//    click(By.name("selected[]"));
+  public void delete() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
@@ -64,9 +63,16 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     fillNewContactForm(contact, true);
     submitNewContactCreation();
+    returnToHomePage();
+  }
+
+  public void modify(List<ContactData> before, ContactData contact) {
+    initContactModification((before.size() - 1) + 2); //модифицируем последнюю строку
+    fillNewContactForm(contact, false);
+    submitContactModification();
     returnToHomePage();
   }
 
@@ -78,7 +84,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']")); //список строк таблицы контактов
     for (WebElement element : elements) {

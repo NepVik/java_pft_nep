@@ -51,7 +51,7 @@ public class ApplicationManager {
     return groupHelper;
   }
 
-  public ContactHelper getContactHelper() {
+  public ContactHelper contact() {
     return contactHelper;
   }
 
@@ -59,7 +59,7 @@ public class ApplicationManager {
     return navigationHelper;
   }
 
-  public void gotoAddNew() {
-    navigationHelper.gotoAddNew();
-  }
+//  public void gotoAddNew() {
+//    navigationHelper.addNewPage();
+//  }
 }

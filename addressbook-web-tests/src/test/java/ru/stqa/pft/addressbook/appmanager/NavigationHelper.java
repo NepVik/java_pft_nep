@@ -21,10 +21,10 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
 
-  public void gotoAddNew() {
+  public void addNewPage() {
     wd.findElement(By.linkText("add new")).click();
   }
-  public void gotoHome(){
+  public void homePage(){
     if (isElementPresent(By.id("maintable"))) {
       return;
     } else {
