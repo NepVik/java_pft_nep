@@ -33,12 +33,13 @@ public class ContactData {
   private String allPhones;
   @Expose
   private String allEmailes;
+  private File photo;
 
   public File getPhoto() {
     return photo;
   }
 
-  private File photo;
+
 
   public String getHomePhone() {
     return homePhone;

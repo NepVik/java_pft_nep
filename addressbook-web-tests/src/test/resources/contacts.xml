@@ -11,6 +11,7 @@
     <homePhone>numberHome 0</homePhone>
     <mobile>numberMibile 0</mobile>
     <workPhone>numberWork 0</workPhone>
+    <photo>src\test\resources\stru.png</photo>
   </ru.stqa.pft.addressbook.model.ContactData>
   <ru.stqa.pft.addressbook.model.ContactData>
     <firstname>firstname 1</firstname>
@@ -24,6 +25,7 @@
     <homePhone>numberHome 1</homePhone>
     <mobile>numberMibile 1</mobile>
     <workPhone>numberWork 1</workPhone>
+    <photo>src\test\resources\stru.png</photo>
   </ru.stqa.pft.addressbook.model.ContactData>
   <ru.stqa.pft.addressbook.model.ContactData>
     <firstname>firstname 2</firstname>
@@ -37,5 +39,6 @@
     <homePhone>numberHome 2</homePhone>
     <mobile>numberMibile 2</mobile>
     <workPhone>numberWork 2</workPhone>
+    <photo>src\test\resources\stru.png</photo>
   </ru.stqa.pft.addressbook.model.ContactData>
 </list>

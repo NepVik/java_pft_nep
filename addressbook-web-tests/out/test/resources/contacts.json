@@ -9,7 +9,8 @@
     "group": "[none]",
     "homePhone": "numberHome 0",
     "mobile": "numberMibile 0",
-    "workPhone": "numberWork 0"
+    "workPhone": "numberWork 0",
+    "photo": {}
   },
   {
     "firstname": "firstname 1",
@@ -21,7 +22,8 @@
     "group": "[none]",
     "homePhone": "numberHome 1",
     "mobile": "numberMibile 1",
-    "workPhone": "numberWork 1"
+    "workPhone": "numberWork 1",
+    "photo": {}
   },
   {
     "firstname": "firstname 2",
@@ -33,6 +35,7 @@
     "group": "[none]",
     "homePhone": "numberHome 2",
     "mobile": "numberMibile 2",
-    "workPhone": "numberWork 2"
+    "workPhone": "numberWork 2",
+    "photo": {}
   }
 ]
