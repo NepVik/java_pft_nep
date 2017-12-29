@@ -1,0 +1,41 @@
+<list>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>firstname 0</firstname>
+    <lastname>lastname 0</lastname>
+    <address>address 0</address>
+    <address2>address2 0</address2>
+    <email>email 0</email>
+    <email2>email2 0</email2>
+    <email3>email3 0</email3>
+    <group>[none]</group>
+    <homePhone>numberHome 0</homePhone>
+    <mobile>numberMibile 0</mobile>
+    <workPhone>numberWork 0</workPhone>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>firstname 1</firstname>
+    <lastname>lastname 1</lastname>
+    <address>address 1</address>
+    <address2>address2 1</address2>
+    <email>email 1</email>
+    <email2>email2 1</email2>
+    <email3>email3 1</email3>
+    <group>[none]</group>
+    <homePhone>numberHome 1</homePhone>
+    <mobile>numberMibile 1</mobile>
+    <workPhone>numberWork 1</workPhone>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstname>firstname 2</firstname>
+    <lastname>lastname 2</lastname>
+    <address>address 2</address>
+    <address2>address2 2</address2>
+    <email>email 2</email>
+    <email2>email2 2</email2>
+    <email3>email3 2</email3>
+    <group>[none]</group>
+    <homePhone>numberHome 2</homePhone>
+    <mobile>numberMibile 2</mobile>
+    <workPhone>numberWork 2</workPhone>
+  </ru.stqa.pft.addressbook.model.ContactData>
+</list>
