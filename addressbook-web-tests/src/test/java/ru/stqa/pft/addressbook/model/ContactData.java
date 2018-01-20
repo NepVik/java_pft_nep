@@ -67,9 +67,6 @@ public class ContactData {
   public File getPhoto() {
     return new File (photo);
   }
-
-
-
   public String getHomePhone() {
     return homePhone;
   }
