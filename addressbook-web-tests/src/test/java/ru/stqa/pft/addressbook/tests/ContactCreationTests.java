@@ -67,7 +67,7 @@ public class ContactCreationTests extends TestBase{
     Contacts after = app.db().contacts();
     assertThat(after,equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-
+    verifyContactListInUI();
   }
 
   @Test (enabled = false)
@@ -77,12 +77,10 @@ public class ContactCreationTests extends TestBase{
     File photo = new File("src/test/resources/stru.png");
     System.out.println(photo.getAbsolutePath());
     System.out.println(photo.exists());
-
   }
 
   @Test (enabled = false)
   public void testBadContactCreation() {
-
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.goTo().addNewPage();
@@ -92,7 +90,5 @@ public class ContactCreationTests extends TestBase{
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
     assertThat(after,equalTo(before));
-
   }
-
 }
