@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.appmanager.ContactHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.Groups;
@@ -64,7 +65,8 @@ public class ContactCreationTests extends TestBase{
  //   File photo = new File("src/test/resources/stru.png");
  //   ContactData contact = new ContactData()
  //           .withFirstname("Name2").withLastname("Name3").withAddress("Address1").withEmail("E-mail1").withMobile("1234567890").withPhoto(photo);
-    app.contact().create(contact);
+    app.contact().fillNewContactForm(contact.inGroup(groups.iterator().next()), true);
+    app.contact().create();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after,equalTo(
@@ -83,12 +85,14 @@ public class ContactCreationTests extends TestBase{
 
   @Test (enabled = false)
   public void testBadContactCreation() {
+    Groups groups = app.db().groups();
     app.goTo().homePage();
     Contacts before = app.contact().all();
     app.goTo().addNewPage();
     ContactData contact = new ContactData()
-            .withFirstname("Name2'").withLastname("Name3").withAddress("Address1").withEmail("E-mail1").withMobile("1234567890");//.withGroup("[none]");
-    app.contact().create(contact);
+            .withFirstname("Name2'").withLastname("Name3").withAddress("Address1").withEmail("E-mail1").withMobile("1234567890").inGroup(groups.iterator().next());
+    app.contact().fillNewContactForm(contact, true);
+    app.contact().create();
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
     assertThat(after,equalTo(before));
