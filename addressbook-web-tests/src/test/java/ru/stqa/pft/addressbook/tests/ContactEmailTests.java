@@ -16,11 +16,13 @@ public class ContactEmailTests extends TestBase{
   @BeforeMethod
   public void ensurePreconditions() {
     Groups groups = app.db().groups();
+    ContactData contact = new ContactData()
+            .withFirstname("1").withLastname("2").withEmail("1@mail.ru").withEmail2("2@mail.ru").withEmail3("3@mail.ru").inGroup(groups.iterator().next());
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
        app.goTo().addNewPage();
-       app.contact().create(new ContactData()
-               .withFirstname("1").withLastname("2").withEmail("1@mail.ru").withEmail2("2@mail.ru").withEmail3("3@mail.ru").inGroup(groups.iterator().next()));
+       app.contact().fillNewContactForm(contact, true);
+       app.contact().create();
     }
   }
 

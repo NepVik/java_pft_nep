@@ -28,24 +28,6 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillNewContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"),contactData.getFirstname());
-    type(By.name("lastname"), contactData.getLastname());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("email"), contactData.getEmail());
-    type(By.name("mobile"), contactData.getMobile());
-    attach(By.name("photo"), contactData.getPhoto());
-
-    if (creation) {
-      if (contactData.getGroups().size() > 0) {
-        Assert.assertTrue(contactData.getGroups().size() == 1);
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
-      }
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
-  }
-
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
@@ -54,11 +36,27 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
-  public void create(ContactData newContact) {
-    fillNewContactForm(newContact, true);
+  public void create() {
     submitNewContactCreation();
     contactCeche = null;
     returnToHomePage();
+  }
+
+  public void fillNewContactForm(ContactData contactData, boolean creation) {
+    type(By.name("firstname"),contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("mobile"), contactData.getMobile());
+    attach(By.name("photo"), contactData.getPhoto());
+    if (creation) {
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void modify(ContactData contact) {

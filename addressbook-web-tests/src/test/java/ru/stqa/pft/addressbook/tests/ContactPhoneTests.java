@@ -16,11 +16,13 @@ public class ContactPhoneTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     Groups groups = app.db().groups();
+    ContactData contact = new ContactData()
+            .withFirstname("1").withLastname("2").withHomePhone("11111").withMobile("22222").withWorkPhone("33333").inGroup(groups.iterator().next());
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
        app.goTo().addNewPage();
-       app.contact().create(new ContactData()
-               .withFirstname("1").withLastname("2").withHomePhone("11111").withMobile("22222").withWorkPhone("33333").inGroup(groups.iterator().next()));
+       app.contact().fillNewContactForm(contact, true);
+       app.contact().create();
       }
   }
 
