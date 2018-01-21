@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,7 +28,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillNewContactForm(ContactData contactData,boolean creation) {
+  public void fillNewContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"),contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
@@ -36,8 +37,9 @@ public class ContactHelper extends HelperBase {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      if (contactData.getGroup() != null) {
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
       }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -52,8 +54,8 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
-  public void create(ContactData contact) {
-    fillNewContactForm(contact, true);
+  public void create(ContactData newContact) {
+    fillNewContactForm(newContact, true);
     submitNewContactCreation();
     contactCeche = null;
     returnToHomePage();

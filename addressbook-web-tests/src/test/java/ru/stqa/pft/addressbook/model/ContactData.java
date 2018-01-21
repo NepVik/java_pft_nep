@@ -6,63 +6,90 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
 public class ContactData {
+
   @XStreamOmitField
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
   @Column(name = "firstname")
   private String firstname;
+
   @Expose
   @Column(name = "lastname")
   private String lastname;
+
   @Column(name = "address")
   @Type(type = "text")
   private String address;
+
   @Expose
   @Column(name = "address2")
   @Type(type = "text")
   private String address2;
+
   @Expose
   @Column(name = "email")
   @Type(type = "text")
   private String email;
+
   @Expose
   @Column(name = "email2")
   @Type(type = "text")
   private String email2;
+
   @Expose
   @Column(name = "email3")
   @Type(type = "text")
   private String email3;
-  @Expose
-  @Transient
-  private String group;
+
   @Expose
   @Column(name = "home")
   @Type(type = "text")
   private String homePhone;
+
   @Expose
   @Column(name = "mobile")
   @Type(type = "text")
   private String mobile;
+
   @Expose
   @Column(name = "work")
   @Type(type = "text")
   private String workPhone;
+
   @Expose
   @Transient
   private String allPhones;
+
   @Expose
   @Transient
   private String allEmailes;
+
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public void setGroups(Set<GroupData> groups) {
+    this.groups = groups;
+  }
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   public File getPhoto() {
     return new File (photo);
@@ -115,9 +142,6 @@ public class ContactData {
     return email3;
   }
 
-  public String getGroup() {
-    return group;
-  }
 
   public int getId() {
     return id;
@@ -178,11 +202,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
@@ -226,5 +245,10 @@ public class ContactData {
             ", id='" + id + '\'' +
             '}';
 
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 }
