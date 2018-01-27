@@ -7,8 +7,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +34,8 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
+
+
   public void submitContactModification() {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
@@ -42,13 +46,13 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void fillNewContactForm(ContactData contactData, boolean creation) {
+  public void fillNewContactForm(ContactData contactData,boolean creation) {
     type(By.name("firstname"),contactData.getFirstname());
-    type(By.name("lastname"), contactData.getLastname());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("email"), contactData.getEmail());
-    type(By.name("mobile"), contactData.getMobile());
-    attach(By.name("photo"), contactData.getPhoto());
+    type(By.name("lastname"),contactData.getLastname());
+    type(By.name("address"),contactData.getAddress());
+    type(By.name("email"),contactData.getEmail());
+    type(By.name("mobile"),contactData.getMobile());
+    attach(By.name("photo"),contactData.getPhoto());
     if (creation) {
       if (contactData.getGroups().size() > 0) {
         Assert.assertTrue(contactData.getGroups().size() == 1);
@@ -61,7 +65,7 @@ public class ContactHelper extends HelperBase {
 
   public void modify(ContactData contact) {
     initModifyById(contact.getId());
-    fillNewContactForm(contact, false);
+    fillNewContactForm(contact,false);
     submitContactModification();
     contactCeche = null;
     returnToHomePage();
@@ -140,7 +144,7 @@ public class ContactHelper extends HelperBase {
   private void initModifyById(int id) {
 //    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
 
-    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements((By.tagName("td")));
     cells.get(7).findElement(By.tagName("a")).click();
@@ -150,7 +154,53 @@ public class ContactHelper extends HelperBase {
 //    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
 
 
+  }
 
+  public void addContactToGroup(GroupData group) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+    click(By.name("add"));
+  }
 
+  public GroupData groupSelectionFor(ContactData contact,Groups groups) {
+    GroupData thisGroup = new GroupData();
+    Groups contactInGroups = contact.getGroups(); //содержит группы, в которых состоит контакт
+
+    if (contactInGroups.size() == 0) {
+      return groups.iterator().next();
+    } else {
+      for (GroupData group : groups) {
+        for (GroupData contactGroup : contactInGroups) {
+          if (!group.equals(contactGroup)) {
+            return group;
+          } else if (contactInGroups.size() > 1) {
+            contactInGroups.remove(group);
+            break;
+          }
+        }
+      }
+    }
+    return thisGroup; //Такой исход предоствращен в selectContactInHomePage
+  }
+
+  public ContactData selectContactInHomePage(Contacts contacts, int groupsSize) { //Выбор контакта, который не состоит хотя бы в одной группе
+    for (ContactData contact : contacts) {
+      if (groupsSize != contact.getGroups().size()) {
+        selectContactById(contact.getId());
+        return contact;
+      }
+    }
+    ContactData newContact = new ContactData()
+            .withFirstname("1").withLastname("2").withAddress("3").withEmail("4").withMobile("5").withPhoto(new File("src/test/resources/stru.png"));
+    wd.findElement(By.linkText("add new")).click();
+    fillNewContactForm(newContact,true);
+    create();
+    contacts.add(newContact);
+    selectContact(newContact.getFirstname(), newContact.getLastname());
+    return newContact;
+  }
+
+  public void selectContact(String fName, String lName) {
+    wd.findElement(By.cssSelector("input[title='Select (" + fName + " " + lName + ")']")).click();
   }
 }
+

@@ -12,7 +12,6 @@ import java.util.Set;
 @Entity
 @Table(name = "addressbook")
 public class ContactData {
-
   @XStreamOmitField
   @Id
   @Column(name = "id")
@@ -81,6 +80,7 @@ public class ContactData {
   @JoinTable(name = "address_in_groups",
           joinColumns = @JoinColumn(name = "id"),
           inverseJoinColumns = @JoinColumn(name = "group_id"))
+
   private Set<GroupData> groups = new HashSet<GroupData>();
 
   public Groups getGroups() {
@@ -90,9 +90,11 @@ public class ContactData {
     this.groups = groups;
   }
 
+
   public File getPhoto() {
     return new File (photo);
   }
+
   public String getHomePhone() {
     return homePhone;
   }
@@ -140,7 +142,6 @@ public class ContactData {
   public String getEmail3() {
     return email3;
   }
-
 
   public int getId() {
     return id;

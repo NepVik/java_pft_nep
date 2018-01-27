@@ -32,6 +32,12 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
+
+
+  @ManyToMany(mappedBy = "groups")
+
+  private Set<ContactData> contacts = new HashSet<ContactData>();
+
   public Set<ContactData> getContacts() {
     return contacts;
   }
@@ -39,9 +45,6 @@ public class GroupData {
   public void setContacts(Set<ContactData> contacts) {
     this.contacts = contacts;
   }
-
-  @ManyToMany(mappedBy = "groups")
-  private Set<ContactData> contacts = new HashSet<ContactData>();
 
   public String getHeader() {
     return header;
