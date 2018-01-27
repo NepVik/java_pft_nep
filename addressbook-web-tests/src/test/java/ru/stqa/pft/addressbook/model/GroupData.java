@@ -33,13 +33,14 @@ public class GroupData {
   private String footer;
 
 
-
-  @ManyToMany(mappedBy = "groups")
-
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "group_id"),
+          inverseJoinColumns = @JoinColumn(name = "id"))
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
-  public Set<ContactData> getContacts() {
-    return contacts;
+  public Contacts getContacts() {
+    return new Contacts(contacts);
   }
 
   public void setContacts(Set<ContactData> contacts) {

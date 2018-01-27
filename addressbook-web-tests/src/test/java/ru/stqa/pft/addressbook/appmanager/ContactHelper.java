@@ -202,5 +202,44 @@ public class ContactHelper extends HelperBase {
   public void selectContact(String fName, String lName) {
     wd.findElement(By.cssSelector("input[title='Select (" + fName + " " + lName + ")']")).click();
   }
+
+  public GroupData goToGroupTable(Groups groups) {
+    GroupData thisGroup = new GroupData();
+    for (GroupData group : groups) {
+      if (group.getContacts().size() == 0) {
+        continue;
+      } else {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+        thisGroup = group;
+        return thisGroup;
+      }
+    }
+    return thisGroup;
+  }
+
+  public ContactData findContactToId(int id, Contacts contacts) {
+    ContactData thisContact = new ContactData();
+    for (ContactData contact : contacts) {
+      if (contact.getId() == id) {
+        return contact;
+      }
+    }
+    return thisContact;
+  }
+
+  public void checkGroups(Groups groups) {
+    int f = 0;
+    for (GroupData group : groups) {
+      if (group.getContacts().size() == 0) {
+        f++;
+      }
+    }
+    if (f == groups.size()) {
+      wd.findElement(By.name("selected[]")).click();
+      GroupData group1 = groups.iterator().next();
+      addContactToGroup(group1);
+      wd.findElement(By.linkText("home")).click();
+    }
+  }
 }
 
