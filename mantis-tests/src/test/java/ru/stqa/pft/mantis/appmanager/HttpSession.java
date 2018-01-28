@@ -43,7 +43,7 @@ public class HttpSession {
     //содержится текст запроса (html)
     String body = getTextFrom(response);
     //проверка успешности входя пользователя
-    return body.contains(String.format("<span class=\"italic\">%s</span>)", username));
+    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
   }
 
   private String getTextFrom(CloseableHttpResponse response) throws IOException {
