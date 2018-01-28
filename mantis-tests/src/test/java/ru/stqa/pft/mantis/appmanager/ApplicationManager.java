@@ -24,7 +24,6 @@ public class ApplicationManager {
     properties = new Properties();
   }
 
-
   public void init() throws IOException {
     String target = System.getProperty("target","local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
@@ -41,8 +40,15 @@ public class ApplicationManager {
     wd.get(properties.getProperty("web.baseUrl"));
   }
 
-
   public void stop() {
     wd.quit();
+  }
+
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 }
