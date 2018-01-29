@@ -7,12 +7,10 @@ import javax.mail.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.SocketException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.stqa.pft.mantis.appmanager.MailHelper.toModelMail;
 
 public class JamesHelper {
 
