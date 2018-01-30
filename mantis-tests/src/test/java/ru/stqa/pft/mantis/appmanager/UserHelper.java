@@ -32,7 +32,7 @@ public class UserHelper extends HelperBase{
     wd.get(confirmationLink);
     type(By.name("password"), password);
     type(By.name("password_confirm"), password);
-    click(By.cssSelector("input[type='submit']"));
+    click(By.cssSelector("input[value='Update User']"));
   }
 
   public String findConfirmationLink(List<MailMessage> mailMessages,String email){
@@ -53,4 +53,9 @@ public class UserHelper extends HelperBase{
     }
     throw new Error("No user with this id(");
   }
+
+ // private sdsdds (){
+
+
+
 }

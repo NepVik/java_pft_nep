@@ -24,10 +24,9 @@ public class ResetPasswordTests extends TestBase {
   @Test
   public void testResetPassword() throws IOException, MessagingException {
 
-
-
     Users users = app.db().users();
-    String login = app.response().usernameById(21, users);
+
+    String login = app.response().usernameById(23, users);
     String email = String.format("%s@localhost.localdomain", login);
     String newPassword = "1234";
 
@@ -46,5 +45,4 @@ public class ResetPasswordTests extends TestBase {
   public void stopMailServer() {
     app.mail().stop();
   }
-
 }
