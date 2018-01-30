@@ -47,6 +47,10 @@ public class MailHelper {
     }
   }
 
+  public void clearMails(String email) {
+    ;
+  }
+
   public void start() {
     wiser.start();
   }
