@@ -30,11 +30,10 @@ public class RemoveContactFromTheGroupTests extends TestBase{
 
   @Test
   public void TestRemoveContactFromGroup() {
-    Groups notCheckedGroups = app.db().groups();
-    app.contact().checkGroups(notCheckedGroups);
-
     Groups groups = app.db().groups();
     Contacts contacts = app.db().contacts();
+    app.contact().checkAllGroupsIsNotEmpty(groups, contacts); //Проверка, есть ли свободные группы
+
     GroupData thisGroup = app.contact().goToGroupTable(groups);
 
     app.wd.findElement(By.name("selected[]")).click();

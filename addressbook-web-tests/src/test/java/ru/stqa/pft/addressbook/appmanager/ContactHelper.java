@@ -10,11 +10,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -156,13 +152,12 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void addContactToGroup(GroupData group) {
+  public void addSelectedContactToGroup(GroupData group) {
     new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
     click(By.name("add"));
   }
 
   public GroupData groupSelectionFor(ContactData contact,Groups groups) {
-    GroupData thisGroup = new GroupData();
     Groups contactInGroups = contact.getGroups(); //содержит группы, в которых состоит контакт
 
     if (contactInGroups.size() == 0) {
@@ -172,15 +167,17 @@ public class ContactHelper extends HelperBase {
         for (GroupData contactGroup : contactInGroups) {
           if (!group.equals(contactGroup)) {
             return group;
-          } else if (contactInGroups.size() > 1) {
+          }
+          if (contactInGroups.size() > 1) {
             contactInGroups.remove(group);
             break;
           }
         }
       }
     }
-    return thisGroup; //Такой исход предоствращен в selectContactInHomePage
+    throw new Error ("Ooops! Search error now!");//Такой исход предоствращен в selectContactInHomePage
   }
+
 
   public ContactData selectContactInHomePage(Contacts contacts, int groupsSize) { //Выбор контакта, который не состоит хотя бы в одной группе
     for (ContactData contact : contacts) {
@@ -189,14 +186,7 @@ public class ContactHelper extends HelperBase {
         return contact;
       }
     }
-    ContactData newContact = new ContactData()
-            .withFirstname("1").withLastname("2").withAddress("3").withEmail("4").withMobile("5").withPhoto(new File("src/test/resources/stru.png"));
-    wd.findElement(By.linkText("add new")).click();
-    fillNewContactForm(newContact,true);
-    create();
-    contacts.add(newContact);
-    selectContact(newContact.getFirstname(), newContact.getLastname());
-    return newContact;
+    throw new Error ("Check method 'checkAllGroupsIsNotFull'");
   }
 
   public void selectContact(String fName, String lName) {
@@ -227,19 +217,41 @@ public class ContactHelper extends HelperBase {
     return thisContact;
   }
 
-  public void checkGroups(Groups groups) {
-    int f = 0;
+  public void checkAllGroupsIsNotEmpty(Groups groups, Contacts contacts) {
+    int countEmptyGroups = 0;
     for (GroupData group : groups) {
       if (group.getContacts().size() == 0) {
-        f++;
-      }
+        countEmptyGroups++;
+      } else break;
     }
-    if (f == groups.size()) {
-      wd.findElement(By.name("selected[]")).click();
-      GroupData group1 = groups.iterator().next();
-      addContactToGroup(group1);
-      wd.findElement(By.linkText("home")).click();
+    if (countEmptyGroups == groups.size()) {
+      ContactData contact = contacts.iterator().next();
+      selectContact(contact.getFirstname(), contact.getLastname());
+      GroupData thisGroup = groups.iterator().next();
+      addSelectedContactToGroup(thisGroup);
+      wd.findElement(By.linkText("group page \"" + thisGroup.getId() + "\""));
     }
   }
+
+  public boolean checkAllGroupsIsNotFull(Groups groups, Contacts contacts) {
+    int countFullGroups = 0;
+    for (GroupData group : groups) {
+      if (group.getContacts().size() == contacts.size()) {
+        countFullGroups++;
+      } else return true;
+    }
+
+    if (countFullGroups == groups.size()) {
+      wd.findElement(By.linkText("groups")).click();
+      wd.findElement(By.cssSelector("input[value='New group']")).click();
+      type(By.cssSelector("input[name='group_name']"), "freeGroup");
+      type(By.cssSelector("textarea[name='group_header']"), "header");
+      type(By.cssSelector("textarea[name='group_footer']"), "foother");
+      wd.findElement(By.cssSelector("input[value='Enter information']")).click();
+      wd.findElement(By.linkText("home")).click();
+    }
+    return false;
+  }
+
 }
 

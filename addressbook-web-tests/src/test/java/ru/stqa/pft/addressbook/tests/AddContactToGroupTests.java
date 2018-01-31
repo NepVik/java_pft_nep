@@ -1,7 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -27,13 +29,16 @@ public class AddContactToGroupTests extends TestBase{
   @Test
   public void TestAddContactToGroup() {
     Groups groups = app.db().groups();
-    ContactData thisContact = app.contact().selectContactInHomePage(app.db().contacts(), groups.size());
-    Groups contactInGroups = thisContact.getGroups();
-    GroupData thisGroup = app.contact().groupSelectionFor(thisContact, app.db().groups());
-    app.contact().addContactToGroup(thisGroup);
-    app.goTo().homePage();
+    Contacts contacts = app.db().contacts();
+    if (!app.contact().checkAllGroupsIsNotFull(groups, contacts)) { //Проверка, есть ли не переполненные группы, если нет, создает новую группу
+      groups = app.db().groups();
+    }
 
-    assertTrue(contactInGroups.withAdded(thisGroup).contains(thisGroup));
+    ContactData thisContact = app.contact().selectContactInHomePage(contacts, groups.size());
+    GroupData thisGroup = app.contact().groupSelectionFor(thisContact, app.db().groups());
+    app.contact().addSelectedContactToGroup(thisGroup);
+    app.wd.findElement(By.linkText("group page \"" + thisGroup.getName() + "\"")).click();
+    assertTrue(thisContact.getGroups().withAdded(thisGroup).contains(thisGroup));
   }
 }
 
