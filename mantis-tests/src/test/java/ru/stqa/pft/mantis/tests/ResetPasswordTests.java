@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
 import ru.stqa.pft.mantis.model.Users;
+import ru.stqa.pft.mantis.model.UserData;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -23,19 +24,17 @@ public class ResetPasswordTests extends TestBase {
 
   @Test
   public void testResetPassword() throws IOException, MessagingException {
-
     Users users = app.db().users();
-
-    String login = app.response().usernameById(23, users);
-    String email = String.format("%s@localhost.localdomain", login);
-    String newPassword = "1234";
+    UserData infoUser = users.iterator().next();
+    String login = infoUser.getUsername();
+    String email = infoUser.getEmail();
+    String newPassword = "qwerty";
 
     app.response().loginToMantis(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
     app.response().initResetPassword(login); //нужно доставать
     List<MailMessage> mailMessages = app.mail().waitForMail(1,10000);
     String confirmationLink = app.response().findConfirmationLink(mailMessages, email);
     app.response().resetPassword(confirmationLink, newPassword);
-    app.response().logoutWithoutMantis();
     HttpSession session = app.newSession();
     assertTrue(session.login(login, newPassword));
     Assert.assertTrue(session.isLoggedInAs(login));

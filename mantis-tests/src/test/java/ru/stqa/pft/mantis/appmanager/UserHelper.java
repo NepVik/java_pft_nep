@@ -3,8 +3,6 @@ package ru.stqa.pft.mantis.appmanager;
 import org.openqa.selenium.By;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
-import ru.stqa.pft.mantis.model.Users;
-import ru.stqa.pft.mantis.model.UsersData;
 
 import java.util.List;
 
@@ -44,18 +42,4 @@ public class UserHelper extends HelperBase{
   public void logoutWithoutMantis() {
     click(By.cssSelector("a[href='/mantisbt-1.2.19/logout_page.php'"));
   }
-
-  public String usernameById(int id, Users users) {
-    for (UsersData user : users) {
-      if (user.getId() == id) {
-        return user.getUsername();
-      }
-    }
-    throw new Error("No user with this id(");
-  }
-
- // private sdsdds (){
-
-
-
 }

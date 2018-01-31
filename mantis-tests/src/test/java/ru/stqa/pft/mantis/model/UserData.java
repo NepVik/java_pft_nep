@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mantis_user_table")
 
-public class UsersData {
+public class UserData {
   @XStreamOmitField
   @Id
   @Column(name = "id")
@@ -53,11 +53,11 @@ public class UsersData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    UsersData usersData = (UsersData) o;
+    UserData userData = (UserData) o;
 
-    if (id != usersData.id) return false;
-    if (username != null ? !username.equals(usersData.username) : usersData.username != null) return false;
-    return email != null ? email.equals(usersData.email) : usersData.email == null;
+    if (id != userData.id) return false;
+    if (username != null ? !username.equals(userData.username) : userData.username != null) return false;
+    return email != null ? email.equals(userData.email) : userData.email == null;
   }
 
   @Override

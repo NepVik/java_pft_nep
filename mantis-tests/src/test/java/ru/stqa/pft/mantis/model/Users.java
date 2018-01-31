@@ -6,16 +6,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Users extends ForwardingSet<UsersData> {
+public class Users extends ForwardingSet<UserData> {
 
-  private Set<UsersData> delegate;
+  private Set<UserData> delegate;
 
-  public Users(Collection<UsersData> users) {
-    this.delegate = new HashSet<UsersData>(users);
+  public Users(Collection<UserData> users) {
+    this.delegate = new HashSet<UserData>(users);
   }
 
   @Override
-  protected Set<UsersData> delegate() {
+  protected Set<UserData> delegate() {
     return delegate;
   }
 }

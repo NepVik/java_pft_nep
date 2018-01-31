@@ -6,7 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.stqa.pft.mantis.model.Users;
-import ru.stqa.pft.mantis.model.UsersData;
+import ru.stqa.pft.mantis.model.UserData;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ public class DbHelper {
   public Users users() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UsersData> result = session.createQuery( "from UsersData where enabled = '1'" ).list();
-    for ( UsersData user : result) {
+    List<UserData> result = session.createQuery( "from UserData where enabled = '1' AND access_level != '90'" ).list();
+    for ( UserData user : result) {
       System.out.println(user);
     }
     session.getTransaction().commit();
