@@ -31,7 +31,7 @@ public class ResetPasswordTests extends TestBase {
     String newPassword = "qwerty";
 
     app.response().loginToMantis(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
-    app.response().initResetPassword(login); //нужно доставать
+    app.response().initResetPassword(login);
     List<MailMessage> mailMessages = app.mail().waitForMail(1,10000);
     String confirmationLink = app.response().findConfirmationLink(mailMessages, email);
     app.response().resetPassword(confirmationLink, newPassword);

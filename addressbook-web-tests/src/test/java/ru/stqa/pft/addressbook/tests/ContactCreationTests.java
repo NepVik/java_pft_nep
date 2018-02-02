@@ -9,7 +9,6 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.Groups;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -54,7 +53,6 @@ public class ContactCreationTests extends TestBase{
     }
   }
 
-
   @Test(dataProvider = "validContactFromXml")
   public void testContactCreation(ContactData contact) {
     Groups groups = app.db().groups();
@@ -73,7 +71,7 @@ public class ContactCreationTests extends TestBase{
     verifyContactListInUI();
   }
 
-  @Test (enabled = false)
+  @Test
   public void testCurrentDir() {
     File currentDir = new File(".");
     System.out.println(currentDir.getAbsolutePath());
@@ -82,7 +80,7 @@ public class ContactCreationTests extends TestBase{
     System.out.println(photo.exists());
   }
 
-  @Test (enabled = false)
+  @Test
   public void testBadContactCreation() {
     Groups groups = app.db().groups();
     app.goTo().homePage();

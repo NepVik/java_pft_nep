@@ -56,7 +56,8 @@ public class GroupCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "validGroupsFromXml")
-  public void testGroupCreation(GroupData group) {
+  public void testGroupCreation(GroupData group) throws IOException {
+    skipIfNotFixed(869);
     app.goTo().groupPage();
     Groups before = app.db().groups();
     app.group().create(group);
@@ -67,8 +68,9 @@ public class GroupCreationTests extends TestBase {
     verifyGroupListInUI();
   }
 
-  @Test(enabled = false)
-  public void testBadGroupCreation() {
+  @Test
+  public void testBadGroupCreation() throws IOException {
+    skipIfNotFixed(6);
     app.goTo().groupPage();
     Groups before = app.group().all();
     GroupData group = new GroupData().withName("test'");
