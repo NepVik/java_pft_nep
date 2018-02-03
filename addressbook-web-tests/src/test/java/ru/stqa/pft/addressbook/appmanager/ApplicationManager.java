@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import com.jayway.restassured.RestAssured;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -23,6 +24,7 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
   private String browser;
   private DbHelper dbHelper;
+  private RestAssured restAssured;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -33,7 +35,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target","local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
+    restAssured = new RestAssured();
     dbHelper = new DbHelper();
 
     if (browser.equals(BrowserType.FIREFOX)) {
@@ -74,4 +76,7 @@ public class ApplicationManager {
     return dbHelper;
   }
 
+  public RestAssured ra() {
+    return restAssured;
+  }
 }
