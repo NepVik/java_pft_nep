@@ -2,8 +2,8 @@ package ru.stqa.pft.sandbox;
 
 public class Point {
 
-  public double x;
-  public double y;
+  private double x;
+  private double y;
 
   public Point (double x, double y) {
     this.x = x;
