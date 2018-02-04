@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import org.openqa.selenium.remote.BrowserType;

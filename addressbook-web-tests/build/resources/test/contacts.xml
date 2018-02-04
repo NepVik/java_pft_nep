@@ -7,11 +7,11 @@
     <email>email 0</email>
     <email2>email2 0</email2>
     <email3>email3 0</email3>
-    <group>[none]</group>
     <homePhone>numberHome 0</homePhone>
     <mobile>numberMibile 0</mobile>
     <workPhone>numberWork 0</workPhone>
     <photo>src\test\resources\stru.png</photo>
+    <groups/>
   </ru.stqa.pft.addressbook.model.ContactData>
   <ru.stqa.pft.addressbook.model.ContactData>
     <firstname>firstname 1</firstname>
@@ -21,11 +21,11 @@
     <email>email 1</email>
     <email2>email2 1</email2>
     <email3>email3 1</email3>
-    <group>[none]</group>
     <homePhone>numberHome 1</homePhone>
     <mobile>numberMibile 1</mobile>
     <workPhone>numberWork 1</workPhone>
     <photo>src\test\resources\stru.png</photo>
+    <groups/>
   </ru.stqa.pft.addressbook.model.ContactData>
   <ru.stqa.pft.addressbook.model.ContactData>
     <firstname>firstname 2</firstname>
@@ -35,10 +35,10 @@
     <email>email 2</email>
     <email2>email2 2</email2>
     <email3>email3 2</email3>
-    <group>[none]</group>
     <homePhone>numberHome 2</homePhone>
     <mobile>numberMibile 2</mobile>
     <workPhone>numberWork 2</workPhone>
     <photo>src\test\resources\stru.png</photo>
+    <groups/>
   </ru.stqa.pft.addressbook.model.ContactData>
 </list>

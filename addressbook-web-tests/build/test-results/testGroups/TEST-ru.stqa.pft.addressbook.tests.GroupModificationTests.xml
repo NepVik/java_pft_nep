@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.stqa.pft.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-12-29T13:35:44" hostname="noteVikky" time="1.73">
+<testsuite name="ru.stqa.pft.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-02-04T12:29:51" hostname="DESKTOP-E9AJH0S" time="2.617">
   <properties/>
-  <testcase name="testGroupModification" classname="ru.stqa.pft.addressbook.tests.GroupModificationTests" time="1.73"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testGroupModification" classname="ru.stqa.pft.addressbook.tests.GroupModificationTests" time="2.617"/>
+  <system-out><![CDATA[15:29:48.960 [Test worker] INFO  r.s.pft.addressbook.tests.TestBase - Start test testGroupModificationwith parametrs []
+15:29:49.043 [Test worker] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_ where deprecated='0000-00-00'
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_ where deprecated='0000-00-00'
+Hibernate: select contacts0_.group_id as group_id2_0_0_, contacts0_.id as id1_0_0_, contactdat1_.id as id1_1_1_, contactdat1_.address as address2_1_1_, contactdat1_.address2 as address3_1_1_, contactdat1_.email as email4_1_1_, contactdat1_.email2 as email5_1_1_, contactdat1_.email3 as email6_1_1_, contactdat1_.firstname as firstnam7_1_1_, contactdat1_.home as home8_1_1_, contactdat1_.lastname as lastname9_1_1_, contactdat1_.mobile as mobile10_1_1_, contactdat1_.photo as photo11_1_1_, contactdat1_.work as work12_1_1_ from address_in_groups contacts0_ inner join addressbook contactdat1_ on contacts0_.id=contactdat1_.id where contacts0_.group_id=?
+GroupData{id='1', name='1'}
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_ where deprecated='0000-00-00'
+Hibernate: select contacts0_.group_id as group_id2_0_0_, contacts0_.id as id1_0_0_, contactdat1_.id as id1_1_1_, contactdat1_.address as address2_1_1_, contactdat1_.address2 as address3_1_1_, contactdat1_.email as email4_1_1_, contactdat1_.email2 as email5_1_1_, contactdat1_.email3 as email6_1_1_, contactdat1_.firstname as firstnam7_1_1_, contactdat1_.home as home8_1_1_, contactdat1_.lastname as lastname9_1_1_, contactdat1_.mobile as mobile10_1_1_, contactdat1_.photo as photo11_1_1_, contactdat1_.work as work12_1_1_ from address_in_groups contacts0_ inner join addressbook contactdat1_ on contacts0_.id=contactdat1_.id where contacts0_.group_id=?
+GroupData{id='1', name='test1'}
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
