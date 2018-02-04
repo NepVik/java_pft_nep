@@ -1,6 +1,5 @@
 package ru.stqa.pft.sandbox;
 
-import com.sun.deploy.association.utility.AppAssociationWriter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
